@@ -24,17 +24,19 @@ public class DemoController {
 //    }
 
     //Since we have multiple coaches now we use Qualifier to Specify which coach
-//    @Autowired
-//    public DemoController(@Qualifier("karateCoach")Coach theCoach) {    //for a qualifier the 1st letter of class becomes small
-//        myCoach = theCoach;
-//    }
+    @Autowired
+    public DemoController(@Qualifier("karateCoach")Coach theCoach) {    //for a qualifier the 1st letter of class becomes small
+        System.out.println("In Constructor:" + getClass().getSimpleName());
+        myCoach = theCoach;
+    }
 
     //We have used a Primary so even if multiple classed exists the cricketCoach was primary so its default val
     // But Qualifier Overrides Primary so -> Qualifier = Higher Priority
-    @Autowired
-    public DemoController(Coach theCoach) {    //for a qualifier the 1st letter of class becomes small
-        myCoach = theCoach;
-    }
+//    @Autowired
+//    public DemoController(Coach theCoach) {    //for a qualifier the 1st letter of class becomes small
+//        System.out.println("In Constructor:" + getClass().getSimpleName());
+//        myCoach = theCoach;
+//    }
 
     @GetMapping("/workout")
     public String getDailyWorkout() {

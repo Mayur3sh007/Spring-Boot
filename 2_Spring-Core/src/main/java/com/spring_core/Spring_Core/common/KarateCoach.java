@@ -4,6 +4,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class KarateCoach implements Coach{
+
+    public KarateCoach() {
+        System.out.println("In Constructor:" + getClass().getSimpleName());
+    }
+
     public String getDailyWorkout() {
         return "Gooning Streak";
     }

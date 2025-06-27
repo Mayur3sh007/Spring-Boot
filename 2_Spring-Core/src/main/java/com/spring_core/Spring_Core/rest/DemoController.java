@@ -2,6 +2,7 @@ package com.spring_core.Spring_Core.rest;
 
 import com.spring_core.Spring_Core.common.Coach;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,9 +18,15 @@ public class DemoController {
 //    }
 
     //Setter Injection --> Use when dealing with Optional Dependency
+//    @Autowired
+//    public void setCoach(Coach thyCoach) {  //the method name can be anything no need for "setXYZ"
+//        myCoach = thyCoach;
+//    }
+
+    //Since we have multiple coaches now we use Qualifier to Specify which coach
     @Autowired
-    public void setCoach(Coach thyCoach) {  //the method name can be anything no need for "setXYZ"
-        myCoach = thyCoach;
+    public DemoController(@Qualifier("karateCoach")Coach theCoach) {    //for a qualifier the 1st letter of class becomes small
+        myCoach = theCoach;
     }
 
     @GetMapping("/workout")

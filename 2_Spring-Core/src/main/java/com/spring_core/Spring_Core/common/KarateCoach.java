@@ -8,9 +8,9 @@ import org.springframework.stereotype.Component;
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE) //Now diff obj is created for each call
 public class KarateCoach implements Coach{
 
-    public KarateCoach() {
-        System.out.println("In Constructor:" + getClass().getSimpleName());
-    }
+//    public KarateCoach() {
+//        System.out.println("In Constructor:" + getClass().getSimpleName());
+//    }
 
     public String getDailyWorkout() {
         return "Gooning Streak";

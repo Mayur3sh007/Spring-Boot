@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class DemoController {
 
     private Coach myCoach;  //private field for our dependency
+    private Coach newCoach;
+
 
     // Constructor Injection --> #1 Recommended Use When dealing with Required Dependency
 //    @Autowired  //Tells spring to inject a dependency - but if we only got 1 constructor then its optional
@@ -24,11 +26,11 @@ public class DemoController {
 //    }
 
     //Since we have multiple coaches now we use Qualifier to Specify which coach
-    @Autowired
-    public DemoController(@Qualifier("karateCoach")Coach theCoach) {    //for a qualifier the 1st letter of class becomes small
-        System.out.println("In Constructor:" + getClass().getSimpleName());
-        myCoach = theCoach;
-    }
+//    @Autowired
+//    public DemoController(@Qualifier("karateCoach")Coach theCoach) {    //for a qualifier the 1st letter of class becomes small
+//        System.out.println("In Constructor:" + getClass().getSimpleName());
+//        myCoach = theCoach;
+//    }
 
     //We have used a Primary so even if multiple classed exists the cricketCoach was primary so its default val
     // But Qualifier Overrides Primary so -> Qualifier = Higher Priority
@@ -37,6 +39,23 @@ public class DemoController {
 //        System.out.println("In Constructor:" + getClass().getSimpleName());
 //        myCoach = theCoach;
 //    }
+
+
+    @Autowired
+    public DemoController(
+            @Qualifier("karateCoach")Coach theCoach,
+            @Qualifier("karateCoach")Coach theNewCoach
+    ) {    //for a qualifier the 1st letter of class becomes small
+        System.out.println("In Constructor:" + getClass().getSimpleName());
+        myCoach = theCoach;
+        newCoach = theNewCoach;
+    }
+
+    //By default bean scope is Singleton i.e both same objects
+    @GetMapping("/check-bean-scope")
+    public String check() {
+        return "Is myCoach == newCoach ? " + (myCoach==newCoach);
+    }
 
     @GetMapping("/workout")
     public String getDailyWorkout() {
